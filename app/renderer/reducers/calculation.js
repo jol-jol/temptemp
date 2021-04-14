@@ -8,19 +8,22 @@ export default handleActions(
       var num = parseFloat(str);
       if (isNaN(str)) {
         if (str)
-          return state;
+          return {...state};
         return {feet: "", meter: ""};
       }
 
       if ("meter" in action.payload) {
-        state.feet = String(num * 3.28084);
-        state.meter = str;
+        return {
+          feet: String(num * 3.28084),
+          meter: str
+        };
       } else {
-        state.meter = String(num / 3.28084);
-        state.feet = str;
-      }
+        return {
 
-      return state;
+          meter: String(num / 3.28084),
+          feet: str
+        };
+      }
     },
   },
   {},
